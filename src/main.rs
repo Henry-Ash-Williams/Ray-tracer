@@ -1,26 +1,24 @@
 #![allow(dead_code)]
 extern crate image;
 
+mod constants;
+
 use std::{
     error::Error
 };
 
-/// Width of the image in pixels 
-pub const IMAGE_WIDTH: u32 = 1920;
-
-/// Height of the image in pixels 
-pub const IMAGE_HEIGHT: u32 = 1080;
-
-/// Background colour of the image
-pub const IMAGE_BACKGROUND: [u8; 3] = [0x00u8, 0x00u8, 0x00u8];
-
+/// Declaration of a sphere
 pub struct Sphere {
+    /// Cartesian position of the origin of a sphere 
     position: (f32, f32, f32),
+    /// Radius of the sphere 
     radius: f32,
+    /// RGB representation of the sphere 
     colour: (u8, u8, u8)
 }
 
 impl Sphere {
+    /// Initialization of a sphere 
     pub fn new(
         position: (f32, f32, f32),
         radius: f32,
@@ -35,14 +33,14 @@ impl Sphere {
 }
 
 fn main() -> Result<(), Box<dyn Error>> {
-    let mut image = image::ImageBuffer::new(IMAGE_WIDTH, IMAGE_HEIGHT);
+    let mut image = image::ImageBuffer::new(constants::IMAGE_WIDTH, constants::IMAGE_HEIGHT);
 
     // Fills the image with a background
-    for y in 0 .. IMAGE_HEIGHT {
-        for x in 0 .. IMAGE_WIDTH {
+    for y in 0 .. constants::IMAGE_HEIGHT {
+        for x in 0 .. constants::IMAGE_WIDTH {
             let pixel = image.get_pixel_mut(x, y);
             let image::Rgb(_data) = *pixel;
-            *pixel = image::Rgb(IMAGE_BACKGROUND);
+            *pixel = image::Rgb(constants::IMAGE_BACKGROUND);
         }
     }
 
