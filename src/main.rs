@@ -20,7 +20,7 @@ fn main() -> Result<(), Box<dyn Error>> {
         constants::IMAGE_WIDTH, constants::IMAGE_HEIGHT
     );
 
-    let scene: Vec<dyn Intersection> = Vec::new();
+    let scene: Vec<Box<dyn Intersection>> = Vec::new();
 
     // Fills the image with a background
     for y in 0 .. constants::IMAGE_HEIGHT {
