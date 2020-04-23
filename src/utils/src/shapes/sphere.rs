@@ -31,7 +31,7 @@ impl Sphere {
 }
 
 impl Intersection for Sphere {
-    fn intersects(&self, v: Vector3<f32>) -> bool {
-        false
+    fn intersects(&self, s: Vector3<f32>, d: Vector3<f32>) -> Option<Vector3<f32>> {
+        None 
     }
 }

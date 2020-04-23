@@ -8,16 +8,16 @@ use utils::{
 };
 
 pub struct Scene {
-    UpDirection: Vector3<f32>,
-    LeftDirection: Vector3<f32>,
-    LookDirection: Vector3<f32>,
-    EyePosition: Vector3<f32>,
-    MeshTopLeft: Vector3<f32>,
-    MeshDistance: f32,
-    PixelWidth: u32,
-    ScreenWidth: u32,
-    ScreenHeight: u32,
-    scene_objects: Vec<Box<dyn Intersection>> 
+    pub UpDirection: Vector3<f32>,
+    pub LeftDirection: Vector3<f32>,
+    pub LookDirection: Vector3<f32>,
+    pub EyePosition: Vector3<f32>,
+    pub MeshTopLeft: Vector3<f32>,
+    pub MeshDistance: f32,
+    pub PixelWidth: u32,
+    pub ScreenWidth: u32,
+    pub ScreenHeight: u32,
+    pub scene_objects: Vec<Box<dyn Intersection>> 
 }
 
 impl Scene {
@@ -31,7 +31,7 @@ impl Scene {
         ScreenHeight: u32,
     ) -> Scene {
         let UpDirection = LookDirection.cross(&LeftDirection).normalize();
-        let MeshTopLeft = EyePosition + (MeshDistance * LookDirection) + ((PixelWidth * ScreenWidth / 2) as f32 * LeftDirection) + PixelWidth as f32;
+        let MeshTopLeft = EyePosition + (MeshDistance * LookDirection) + ((PixelWidth * ScreenWidth / 2) as f32 * LeftDirection) + ((PixelWidth * ScreenHeight / 2) as f32 * UpDirection);
         
         Scene {
             UpDirection: UpDirection,
@@ -47,7 +47,7 @@ impl Scene {
         }
     }
 
-    pub fn add_scene_object<'a, O>(&mut self, object: O) where O: Intersection + Clone {
+    pub fn add_scene_object<O: 'static>(&mut self, object: O) where O: Intersection + Clone {
         self.scene_objects.push(Box::new(object));
     } 
 
